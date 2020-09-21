@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue源码涉及知识点</title>
+</head>
+
+<body>
+    <div>
+        <p id="test">hello</p>
+        <p style="display: none;">hai</p>
+        <p>hello</p>
+        <div></div>
+    </div>
+    <script>
+        const div = document.querySelector('div')
+        console.log(div.textContent) //返回所有文本
+        console.log(div.innerText) //返回所有文本(受css样式影响的不包含)
+        console.log(div.innerHTML) //返回element内部的html片段
+
+        const p = document.getElementById('test')
+        // console.log(typeof div.children)   obj 所有有效子节点，不含换行/文本
+        // console.log( typeof div.childNodes) obj
+        // console.log(p.childNodes,p.children)  1/0
+        // 一直为真
+        if (p.children) {
+            console.log('ok')
+        }
+
+        // str.split() str.startsWith() str.substring()
+        const str = 'hello'
+        console.log(str.split())
+
+        const arr = [1, 2, 3, 4]
+        arr.reduce((...arguments) => {
+            // accu(累计回调返回值，默认为1) curValue index arr
+            console.log(arguments)
+        })
+        const value = arr.reduce((x, y) => {
+            console.log(x, y)
+            return x + y
+        }, 4)
+        console.log(value)
+
+        // 数组的结构赋值
+        const [, b] = [2]
+        console.log(b)
+
+        // if else 问题   下面同时打印(即代码从上到下执行) 因为没有将代码放入互斥条件判断中
+        if (1 === 1) {
+            console.log('1')
+        }
+        if (1 === 1) {
+            console.log('2')
+        }
+
+        // 正则表达式及方法
+        console.log(/\{\{(.+)\}\}/g.test('{{name}}---{{age}}'))
+        var str1 = '{{name}}---{{age}}'
+        // 原字符串不会改变
+        str1 = str1.replace(/\{\{.+?\}\}/g, (...args) => {
+            // 多次匹配成功触发多次回调 回调返回值替换匹配项
+            console.log(args)
+            return 'hello'
+        })
+        console.log(str1)
+
+        // var 声明变量可重复 函数中声明不影响外部
+        // const/let不可重复 代码块中定义不影响外部
+        if (1 == 1) {
+            let name = 'cj'
+        }
+        let name = 'sb'
+        console.log(name)
+
+        var age = 28
+        if (1 == 1) {
+            var age = 18
+        }
+        console.log(age) //18  
+    </script>
+</body>
+
+</html>

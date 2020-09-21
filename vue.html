@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./Test.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 表达式 -->
+        <h1>{{name}}--{{age}}</h1>
+        <!-- data嵌套 -->
+        <h2>{{hobby.two}}</h2>
+        <!-- 嵌套 -->
+        <div>
+            <p>{{name}}</p>
+        </div>
+        <!-- 指令 -->
+        <p v-text='hobby.one'></p>
+        <p v-html='age'></p>
+        <input type="text" v-model='age'>
+        <button v-on:click='handClick'>切换</button>
+        <button @click='handClick'>@切换</button>
+    </div>
+    <script>
+        const vm = new Test({
+            el: '#app',
+            data: {
+                name: 'cj',
+                age: 18,
+                hobby: {
+                    one: 'basketball',
+                    two: 'football'
+                }
+            },
+            methods: {
+                handClick() {
+                    // this.data.age=28
+                    console.log(this)
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
