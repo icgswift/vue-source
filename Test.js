@@ -1,3 +1,5 @@
+// import Observer from './Observe'    暂不支持ES6语法
+
 class Compile {
     constructor(el, vm, data) {
         this.vm = vm
@@ -157,8 +159,11 @@ class Test {
         // 如何为methods的方法绑定this    绑定为vm，修改vm中的数据(并不修改option中的数据)
         //  option.methods.handClick.bind(this) 这里绑定没用，触发时this为触发对象
         if (this.el) {
-            // 实现编译器
+            // 实现编译器compile
             new Compile(this.el, this, this.data)
+
+            //实现数据监听Observe 
+            new Observer(this.data,this)
         }
     }
 }
