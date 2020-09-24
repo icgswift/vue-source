@@ -120,8 +120,16 @@ class Compile {
             new Watcher(vm, expr, this, (newVAL) => {
                 this.updater.modelUpdater(el, newVAL)
             })
+
             const value = this.getMsg(expr, vm)
+            //数据》视图 
             this.updater.modelUpdater(el, value)
+            // 视图》数据
+            el.addEventListener('input', (e) => {
+                const newVal = e.target.value
+                this.updater.modelUpdater(el, newVal)
+                vm.data[expr] = newVal
+            })
         },
         html(el, expr, vm) {
             new Watcher(vm, expr, this, (newVAL) => {

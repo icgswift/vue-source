@@ -40,10 +40,9 @@
                 }
             },
             methods: {
+                // 事件的this被绑定指向vm
                 handClick() {
-                    // this.data.age=28
-                    console.log(this)
-
+                    this.age = 28
                 }
             }
         })

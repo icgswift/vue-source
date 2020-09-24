@@ -1,3 +1,4 @@
+// Dep dependence依赖
 class Dep {
     constructor() {
         // 保存watchers的数组 为什么是数组：多个指令或表达式指向同一个data
