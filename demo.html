@@ -20,6 +20,7 @@
         console.log(div.innerText) //返回所有文本(受css样式影响的不包含)
         console.log(div.innerHTML) //返回element内部的html片段
 
+
         const p = document.getElementById('test')
         // console.log(typeof div.children)   obj 所有有效子节点，不含换行/文本
         // console.log( typeof div.childNodes) obj
@@ -29,9 +30,11 @@
             console.log('ok')
         }
 
+
         // str.split() str.startsWith() str.substring()
         const str = 'hello'
         console.log(str.split())
+
 
         const arr = [1, 2, 3, 4]
         arr.reduce((...arguments) => {
@@ -44,9 +47,11 @@
         }, 4)
         console.log(value)
 
+
         // 数组的结构赋值
         const [, b] = [2]
         console.log(b)
+
 
         // if else 问题   下面同时打印(即代码从上到下执行) 因为没有将代码放入互斥条件判断中
         if (1 === 1) {
@@ -55,6 +60,7 @@
         if (1 === 1) {
             console.log('2')
         }
+
 
         // 正则表达式及方法
         console.log(/\{\{(.+)\}\}/g.test('{{name}}---{{age}}'))
@@ -66,6 +72,7 @@
             return 'hello'
         })
         console.log(str1)
+
 
         // var 声明变量可重复 函数中声明不影响外部
         // const/let不可重复 代码块中定义不影响外部
@@ -81,8 +88,49 @@
         }
         console.log(age) //18  
 
+
         //类型判断 object number...加引号
-       console.log( typeof age === 'object' )
+        console.log(typeof age === 'object')
+
+        // Object.defineProperty 的问题：
+        var obj = {
+            el: '#app',
+            data: {
+                name: 'cj',
+                age: 18
+            }
+        }
+
+        function observer(obj, data) {
+            Object.keys(data).forEach(item => {
+
+                Object.defineProperty(obj, item, {
+                    get() {
+                        console.log('执行get函数')
+
+                        return data[item]
+                    },
+                    set(value) {
+                        console.log('执行set函数')
+
+                        data[item] = value
+                    }
+                })
+            })
+        }
+        observer(obj, obj.data)
+        // get() set()函数什么情况会被调用 读取/修改(obj.xxx) 添加了这两个函数的属性时
+        console.log(obj.data.name) //obj.data未绑定get/set
+        console.log(obj.name)
+
+
+        // 闭包   Closure (wrap) num: 5
+        function wrap(num) {
+            return function inner() {
+                console.log(num)
+            }
+        }
+        const con = wrap(5)
 
     </script>
 </body>

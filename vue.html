@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="./Observe.js"></script>
-    <script src="./Test.js"></script>
+    <script src="./Compile.js"></script>
+    <script src="./Watcher.js"></script>
+    <script src="./MVVM.js"></script>
 </head>
 
 <body>
@@ -20,14 +22,14 @@
             <p>{{name}}</p>
         </div>
         <!-- 指令 -->
-        <p v-text='hobby.one'></p>
+        <p v-text='age'></p>
         <p v-html='age'></p>
         <input type="text" v-model='age'>
         <button v-on:click='handClick'>切换</button>
         <button @click='handClick'>@切换</button>
     </div>
     <script>
-        const vm = new Test({
+        const vm = new MVVM({
             el: '#app',
             data: {
                 name: 'cj',
