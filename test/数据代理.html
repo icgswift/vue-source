@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>数据劫持</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script>
+        var vm = new Vue({
+            el: '#demo',
+            data: {
+                name: 'cj',
+                age: 18
+            }
+        })
+        // 通过数据 劫持/观察/更新 实现数据绑定的效果
+        /* 
+           数据绑定
+           1.初始化显示：模板解析/编译
+           2.更新显示
+        
+        
+        
+        */
+        console.log(vm)
+        console.log(vm.$data.name)
+        console.log(vm._data.name)
+        console.log(vm.name)
+        console.log(vm._data.name === vm.name)
+        // console.log(vm.data.name)  vm.data is undefined   传入参数对象的data不过是传参，而属性的存在与否得看Vue构造函数是否定义
+
+
+
+
+        //数据劫持 通过Object.defineProperty实现对data的获取与更新 交给this(实例对象)代理
+        function Test(options) {
+            for (let option in options.data) {
+                // this指向构造函数实例
+                Object.defineProperty(this, option, {
+                    get() {
+                        return options.data[option]
+                    },
+                    set(value) {
+                        options.data[option] = value
+                    }
+                })
+            }
+        }
+        var te = new Test({
+            data: {
+                name: 'cj',
+                age: 18
+            }
+        })
+        console.log(te.name, te.age)
+    </script>
+</body>
+
+</html>

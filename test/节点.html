@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">hello
+    </div>
+    <!-- <p>hello</p> -->
+    <!-- <h1>hello</h1> -->
+    // console.log(textNode) 换行空格
+    <script>
+        // 获取元素节点
+        const elementNode = document.getElementById('box')
+        // 获取属性节点
+        const attrNode = elementNode.getAttributeNode('id')
+        // 获取文本节点
+        const textNode = elementNode.firstChild
+        console.log(elementNode.nodeType, attrNode.nodeType, textNode.nodeType)
+    </script>
+</body>
+
+</html>

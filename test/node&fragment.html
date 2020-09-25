@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<!-- 
+     document:包含n个element 更新element 页面更新
+     documentFragment:内存中保存n个element的容器对象 更新element 界面不会更新
+
+     何为伪数组：1.每个子项有下标  2.length
+     转换伪数组：[].slice.call()
+ -->
+
+<body>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <!-- 
+        选择器获取到DOM的类型
+        节点：querySelector getElementById   
+        伪数组：getElementsByTagName  querySelectorAll ...
+
+        DOM属性.XXX 的类型
+        节点：firstchild 
+        伪数组：children childNodes
+        node.appendChild(必须是节点)
+     -->
+    <script>
+        // var btns = document.getElementsByTagName('button');
+        // console.log(btns, btns[0], btns instanceof Array, btns.foreach) 类型判断instanceof 查找原型链 .foreach
+        // slice不修改原数组，返回新数组
+        // console.log([].slice.call(btns))
+
+
+        //    fragement示例 
+        /*    var ul = document.querySelector('ul')
+              // console.log(ul) 节点          document.getElementsByTagName('ul') 伪数组
+
+           var fragment = document.createDocumentFragment()
+           var cities = ['bj', 'sh', 'wh']
+           cities.forEach(city => {
+                   const li = document.createElement('li')
+                   li.innerText = city
+                   fragment.appendChild(li)
+           })
+              ul.appendChild(fragment)                         */
+
+
+
+        // 目标:将所有li的文字一次性修改为hello
+
+        /* 1.渲染三次，页面更新三次
+           var lis = document.getElementsByTagName('li');
+           for (let i = 0; i < lis.length; i++) {
+            lis[i].innerHTML = 'hello'
+           }                                                     */
+
+
+        // 2.应用fragment
+        // 创建fragment
+        var ul = document.querySelector('ul')
+        var fragment = document.createDocumentFragment()
+
+        // 获取li添加到fragment并修改
+        // var lis = document.querySelectorAll('li')
+        // fragment.appendChild(lis)           lis为伪数组，appendChild添加的需是节点
+
+        // console.log(ul.firstChild)  换行符
+        // 换行符/空格和li 交替 
+        var child
+        // 重复执行，直到 while(false)
+        while (child = ul.firstChild) {
+            fragment.appendChild(child) //节点只能有一个父节点  作用有二：1.从源dom删除  2.添加到fragment
+        }
+
+        /*    fragment.childNodes.forEach(el => {
+               el.innerHTML = 'hello'
+           }); */
+        ;
+        [].slice.call(fragment.children).forEach(el => {
+            el.innerHTML = 'hello'
+        })
+
+        // 添加到ul
+        ul.appendChild(fragment)
+    </script>
+</body>
+
+</html>
